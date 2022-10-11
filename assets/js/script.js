@@ -1,12 +1,14 @@
 // --- Create History Button --- 
 // var citySearchUser = $('#search'); 
 var cityHistory = $('#city-list'); // parent
+var current = $('#weather-current'); 
+var forecast = $('#forecast')
 var city
 // cityList.append('<li class="city-titles">Chicago</li>'); // add child to cityList parent
 
 function weather() {
     // --- Create city history new button
-    console.log('Weather City: ' + city)
+    console.log('City: ' + city)
     citySearch = $('<button>'); // Previously missing the <>
     citySearch.addClass('city-titles');
     citySearch.attr('name',city)
@@ -18,7 +20,7 @@ function weather() {
     var apiKey = 'eea82704764516c62016fa4ce2668513';
 
     // --- Get the latitude and longitude
-    var queryLatLon = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=' + apiKey;
+    let queryLatLon = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=' + apiKey;
 
     fetch(queryLatLon)
         .then(function (response) {
@@ -34,22 +36,34 @@ function weather() {
             console.log('Lat:' + lat)
             console.log('Lon: ' + lon)
 
-            // --- Get the future forecast
+            // --- Access the weather API
             // var weatherFuture = 'http://api.openweathermap.org/data/2.5/forecast/daily?lat=' + lat + '&lon=' + lon + '&cnt=5&appid=' + apiKey;
-            var queryFuture = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon='+ lon + '&appid=' + apiKey + '&units=imperial';
+            let queryWeather = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon='+ lon + '&appid=' + apiKey + '&units=imperial';
+            current.empty() // Removes the child elements of the selected element
+            forecast.empty() 
 
-            fetch(queryFuture)
+            fetch(queryWeather)
                 .then(function (response) {
                     return response.json(); 
                 })
-
+                
                 .then(function(data) {
+                    // -- Get the current weather
+                    let today = moment().format('M/D/YY')
+                    let currentCard = $('<card>')
+                    currentCard.text(city)
+                    current.append(currentCard);
+                    currentCard.append('Today: ' + today)
+                    currentCard.append('<p>Temp: ' + data.list[0].main.temp + ' F</p>')
+                    currentCard.append('<p>Wind: '  + data.list[0].wind.speed + ' mph</p>')
+                    currentCard.append('<p>Humidity: ' + data.list[0].main.humidity + ' %</p>')
+                    currentCard.append('<p>Icon: ' + data.list[0].weather[0].description + '</p>')                    
 
-                    for (var i = 1; i < 6; i++) {
-                        var forecast = $('#forecast')
-                        var forecastCard = $('<card>')
-                        var date = moment().add(i, 'days').format('M/D/YY');
-                        forecast.addClass('col-2.4') // Added this to try to format
+                    // --- Get the future forecast
+                    for (let i = 1; i < 6; i++) {   
+                        let date = moment().add(i, 'days').format('M/D/YY')
+                        let forecastCard = $('<card>')
+                        // forecast.addClass('col-2.4') // Added this to try to format
                         forecastCard.text('Forecast Day: ' + date) 
                         forecast.append(forecastCard)
                         forecastCard.append('<p>Temp: ' + data.list[i].main.temp + ' F</p>')
@@ -73,8 +87,8 @@ function cityForm(event) {
 // --- Asign the variable city from a city history button
 function cityList(event) {
     event.preventDefault();
-    city = $(event.target).attr('name');
-    // console.log('event target: ' + event.tar]get)
+    console.log('event target: ' + event.target)
+    city = $(event.target).attr('name'); 
     // console.log('test: ' + test)
     // var city = $('.name');
     // console.log(event)
