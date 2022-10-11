@@ -44,10 +44,12 @@ function weather() {
                 })
 
                 .then(function(data) {
+
                     for (var i = 1; i < 6; i++) {
                         var forecast = $('#forecast')
                         var forecastCard = $('<card>')
                         var date = moment().add(i, 'days').format('M/D/YY');
+                        forecast.addClass('col-2.4') // Added this to try to format
                         forecastCard.text('Forecast Day: ' + date) 
                         forecast.append(forecastCard)
                         forecastCard.append('<p>Temp: ' + data.list[i].main.temp + ' F</p>')
