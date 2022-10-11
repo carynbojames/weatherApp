@@ -42,7 +42,6 @@ function weather() {
             forecast.empty() 
             forecast.show()
             /// QUESTION: Why isn't it showing back up again?
-            
 
             fetch(queryWeather)
                 .then(function (response) {
@@ -65,13 +64,13 @@ function weather() {
                     for (let i = 1; i < 6; i++) {   
                         let date = moment().add(i, 'days').format('M/D/YY')
                         let forecastCard = $('<card>')
-                        // forecast.addClass('col-2.4') // Added this to try to format
-                        forecastCard.text('Forecast Day: ' + date) 
+                        forecastCard.addClass('col-2.4') // Added this to try to format
+                        forecastCard.text(date) 
                         forecast.append(forecastCard)
+                        forecastCard.append('<p>Icon: ' + data.list[i].weather[0].description + '</p>')
                         forecastCard.append('<p>Temp: ' + data.list[i].main.temp + ' F</p>')
                         forecastCard.append('<p>Wind: '  + data.list[i].wind.speed + ' mph</p>')
                         forecastCard.append('<p>Humidity: ' + data.list[i].main.humidity + ' %</p>')
-                        forecastCard.append('<p>Icon: ' + data.list[i].weather[0].description + '</p>')
                     }
                     console.log(data)
                 })
