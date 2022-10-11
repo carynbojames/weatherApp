@@ -1,10 +1,8 @@
-// --- Create History Button --- 
-// var citySearchUser = $('#search'); 
 var cityHistory = $('#city-list'); // parent
 var current = $('#weather-current'); 
 var forecast = $('#forecast')
 var city
-// cityList.append('<li class="city-titles">Chicago</li>'); // add child to cityList parent
+
 
 function weather() {
     // --- Create city history new button
@@ -19,7 +17,7 @@ function weather() {
 
     var apiKey = 'eea82704764516c62016fa4ce2668513';
 
-    // --- Get the latitude and longitude
+    // --- Get the latitude and longitude via API
     let queryLatLon = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=' + apiKey;
 
     fetch(queryLatLon)
@@ -39,8 +37,12 @@ function weather() {
             // --- Access the weather API
             // var weatherFuture = 'http://api.openweathermap.org/data/2.5/forecast/daily?lat=' + lat + '&lon=' + lon + '&cnt=5&appid=' + apiKey;
             let queryWeather = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon='+ lon + '&appid=' + apiKey + '&units=imperial';
+           
             current.empty() // Removes the child elements of the selected element
             forecast.empty() 
+            forecast.show()
+            /// QUESTION: Why isn't it showing back up again?
+            
 
             fetch(queryWeather)
                 .then(function (response) {
@@ -106,3 +108,6 @@ searchHistory.on('click', '.city-titles', cityList); // no response[]
 
 // var currentTemp = $('#current-temp')
 // currentTemp.text('test')
+
+forecast.hide()
+
