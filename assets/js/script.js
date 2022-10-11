@@ -5,7 +5,7 @@ var city
 // cityList.append('<li class="city-titles">Chicago</li>'); // add child to cityList parent
 
 function weather() {
-    // --- Create a new button
+    // --- Create city history new button
     console.log('Weather City: ' + city)
     citySearch = $('<button>'); // Previously missing the <>
     citySearch.addClass('city-titles');
@@ -27,27 +27,15 @@ function weather() {
 
         .then(function(data){
             console.log(data);
-            // console.log(data[0].lat)
-            // console.log(data[0].lon)
-
-            var lat = data[0].lat
-            var lon = data[0].lon
     
-            var weatherFuture = 'http://api.openweathermap.org/data/2.5/forecast/daily?lat=' + lat + '&lon=' + lon + '&cnt=5&appid=' + apiKey;
-            console.log(weatherFuture)
-
-            // fetch(weatherFuture)
-            //     .then(function (response) {
-            //         return response.json();
-            //     })
-            //     .then(function(data){
-            //         console.log(data);
-            //     })
+            var lat = data[0].lat
+            var lon = data[0].lon       
 
             console.log('Lat:' + lat)
             console.log('Lon: ' + lon)
 
             // --- Get the future forecast
+            // var weatherFuture = 'http://api.openweathermap.org/data/2.5/forecast/daily?lat=' + lat + '&lon=' + lon + '&cnt=5&appid=' + apiKey;
             var queryFuture = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon='+ lon + '&appid=' + apiKey + '&units=imperial';
 
             fetch(queryFuture)
@@ -72,7 +60,7 @@ function weather() {
         })   
 }
 
-// Create city history
+// --- Assign the variable city from the form
 function cityForm(event) {
     event.preventDefault();
     city = $('input[name="city"]').val(); // get value from form
@@ -80,6 +68,7 @@ function cityForm(event) {
     weather();
 }
 
+// --- Asign the variable city from a city history button
 function cityList(event) {
     event.preventDefault();
     city = $(event.target).attr('name');
