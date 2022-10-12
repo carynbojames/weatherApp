@@ -55,7 +55,7 @@ function weather() {
                     let currentCard = $('<card>')
                     currentCard.addClass('mw-100 card shadow-sm p-2')
                     current.append(currentCard);
-                    currentCard.append('<h4>' + city + ' (' + today + ')<img src="http://openweathermap.org/img/wn/' + data.list[0].weather[0].icon + '@2x.png"</h4>')
+                    currentCard.append(`<h4>${city} (${today})<img src="http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png"</h4>`)
                     currentCard.append('<p>Description: ' + data.list[0].weather[0].description + '</p>')
                     currentCard.append('<p>Temp: ' + data.list[0].main.temp + '&#8457</p>')
                     currentCard.append('<p>Wind: '  + data.list[0].wind.speed + ' mph</p>')
@@ -70,7 +70,7 @@ function weather() {
                         forecastCard.addClass('col-2.4 card shadow-sm m-1 p-2') 
                         forecast.append(forecastCard) // Parent 1
                         forecastCard.append('<h5>' + date + '<h5>') 
-                        forecastCard.append('<p><img class="height" src="http://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '@2x.png"/></p>') 
+                        forecastCard.append(`<p><img src="http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png"/></p>`) 
                         forecastCard.append('<p>Description: ' + data.list[i].weather[0].description + '</p>')
                         forecastCard.append('<p>Temp: ' + data.list[i].main.temp + '&#8457</p>')
                         forecastCard.append('<p>Wind: '  + data.list[i].wind.speed + ' mph</p>')
