@@ -8,7 +8,7 @@ function weather() {
     // --- Create city history new button
     console.log('City: ' + city)
     citySearch = $('<button>'); // Previously missing the <>
-    citySearch.addClass('city-titles btn btn-dark m-1 w-100');
+    citySearch.addClass('city-titles btn btn-dark m-1 w-100'); // ACTION: Deleting city-titles affected the code
     citySearch.attr('name',city)
     citySearch.text(city);
     cityHistory.append(citySearch);
@@ -52,9 +52,10 @@ function weather() {
                     // -- Get the current weather
                     let today = moment().format('M/D/YY')
                     let currentCard = $('<card>')
-                    currentCard.text(city)
+                    currentCard.addClass('mw-100 card shadow-sm m-1 p-2')
                     current.append(currentCard);
-                    currentCard.append('Today: ' + today)
+                    currentCard.append('<h4>' + city + '</h4>')
+                    currentCard.append('<p>Today: ' + today + '</p>')
                     currentCard.append('<p>Temp: ' + data.list[0].main.temp + ' F</p>')
                     currentCard.append('<p>Wind: '  + data.list[0].wind.speed + ' mph</p>')
                     currentCard.append('<p>Humidity: ' + data.list[0].main.humidity + ' %</p>')

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <header class="jumbotron jumbotron-fluid">
+    <header class="jumbotron jumbotron-fluid text-center">
         <h2 class="p-2">Weather Dashboard</h2>
     </header>
 
@@ -23,13 +23,13 @@
             <div class="col-12 col-md-3">
                 <!-- Search Form -->
                 <div class="p-2"> <!-- Didn't like this in the div above -->
-                    <h2>Search for a City:</h2>
-                    <input type="text" name="city">
+                    <h4>Search for a City:</h4>
+                    <input type="text" name="city" class="w-100">
                     <button class="btn btn-sm btn-secondary m-1" id="searchBtn">Search</button>
                 </div>
                 <!-- History of Cities -->
                 <section id="search-history">
-                    <ul id="city-list"></ul>
+                    <div id="city-list"></div> <!-- Originally had this as a <ul> which affected the margins -->
                 </section>
             </div>
 
@@ -37,7 +37,7 @@
             <div class="col-12 col-md-9">
                 <section id="weather-current"></section>
                 <section id="weather-future">
-                    <h3>5-Day Forecast:</h3>    
+                    <h4>5-Day Forecast:</h4>    
                     <div class="row justify-content" id="forecast"></div>                </div>
                 </section>
             </div>
