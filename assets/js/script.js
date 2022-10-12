@@ -8,7 +8,7 @@ function weather() {
     // --- Create city history new button
     console.log('City: ' + city)
     citySearch = $('<button>'); // Previously missing the <>
-    citySearch.addClass('city-titles');
+    citySearch.addClass('city-titles btn btn-dark m-1 w-100');
     citySearch.attr('name',city)
     citySearch.text(city);
     cityHistory.append(citySearch);
@@ -63,10 +63,10 @@ function weather() {
                     // --- Get the future forecast
                     for (let i = 1; i < 6; i++) {   
                         let date = moment().add(i, 'days').format('M/D/YY')
-                        let forecastCard = $('<card>')
-                        forecastCard.addClass('col-2.4') // Added this to try to format
+                        let forecastCard = $('<card>') // Parent 2
+                        forecastCard.addClass('col-2.4 card shadow-sm m-1 p-2') 
+                        forecast.append(forecastCard) // Parent 1
                         forecastCard.text(date) 
-                        forecast.append(forecastCard)
                         forecastCard.append('<p>Icon: ' + data.list[i].weather[0].description + '</p>')
                         forecastCard.append('<p>Temp: ' + data.list[i].main.temp + ' F</p>')
                         forecastCard.append('<p>Wind: '  + data.list[i].wind.speed + ' mph</p>')

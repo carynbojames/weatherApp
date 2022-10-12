@@ -13,7 +13,7 @@
 
 <body>
     <header class="jumbotron jumbotron-fluid">
-        <h2>Weather Dashboard</h2>
+        <h2 class="p-2">Weather Dashboard</h2>
     </header>
 
     <section class="container" id="search-section"></section>
@@ -22,10 +22,11 @@
             <!-- Cities -->
             <div class="col-12 col-md-3">
                 <!-- Search Form -->
-                <h2>Search for a City:</h2>
-                <input type="text" name="city">
-                <button id="searchBtn">Search</button>
-                
+                <div class="p-2"> <!-- Didn't like this in the div above -->
+                    <h2>Search for a City:</h2>
+                    <input type="text" name="city">
+                    <button class="btn btn-sm btn-secondary m-1" id="searchBtn">Search</button>
+                </div>
                 <!-- History of Cities -->
                 <section id="search-history">
                     <ul id="city-list"></ul>
@@ -37,7 +38,7 @@
                 <section id="weather-current"></section>
                 <section id="weather-future">
                     <h3>5-Day Forecast:</h3>    
-                    <div class="row justify-content-center" id="forecast"></div>                </div>
+                    <div class="row justify-content" id="forecast"></div>                </div>
                 </section>
             </div>
     
