@@ -68,7 +68,7 @@ function weather() {
                     for (let i = 1; i < 6; i++) {   
                         let date = moment().add(i, 'days').format('M/D/YY')
                         let forecastCard = $('<card>') // Parent 2
-                        forecastCard.addClass('col-2.4 card shadow-sm m-1 p-2') 
+                        forecastCard.addClass('col-12 col-md-2 card shadow-sm m-1 p-2') 
                         forecast.append(forecastCard) // Parent 1
                         forecastCard.append('<h5>' + date + '<h5>') 
                         forecastCard.append(`<p><img src="http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png"/></p>`) 
@@ -109,16 +109,3 @@ searchHistory.on('click', '.city-titles', cityList);
 
 future.hide()
 
-
-// Create an array using localStorage of the city named searches
-// Only add if the city name doesn't exist
-// Create a separate function for the list or add it to the cityForm or cityList functions
-
-let cityListStored = localStorage.setItem("cityListSession", "test")
-console.log(cityListStored)
-console.log(cityListSession)
-let cityBtns = localStorage.getItem("cityList")
-console.log(cityBtns)
-
-cityListStored.push("Chicago")
-console.log("CityBtns Push" + cityBtns)
