@@ -8,6 +8,7 @@ var city
 function weather() {
     var welcome = $('#instructions')
     welcome.hide()
+
     // --- Create city history new button
     console.log('City: ' + city)
     citySearch = $('<button>'); // Previously missing the <>
@@ -94,10 +95,6 @@ function cityList(event) {
     event.preventDefault();
     console.log('event target: ' + event.target)
     city = $(event.target).attr('name'); 
-    // console.log('test: ' + test)
-    // var city = $('.name');
-    // console.log(event)
-    // console.log('This: ' + this)
     weather();
 }
 
@@ -107,10 +104,21 @@ search.on('click', cityForm);
 /// QUESTION: Can you make the click execute two functions? 
 
 var searchHistory = $('#search-history');
-searchHistory.on('click', '.city-titles', cityList); // no response[]
+searchHistory.on('click', '.city-titles', cityList); 
 
-// var currentTemp = $('#current-temp')
-// currentTemp.text('test')
 
 future.hide()
 
+
+// Create an array using localStorage of the city named searches
+// Only add if the city name doesn't exist
+// Create a separate function for the list or add it to the cityForm or cityList functions
+
+let cityListStored = localStorage.setItem("cityListSession", "test")
+console.log(cityListStored)
+console.log(cityListSession)
+let cityBtns = localStorage.getItem("cityList")
+console.log(cityBtns)
+
+cityListStored.push("Chicago")
+console.log("CityBtns Push" + cityBtns)
