@@ -1,8 +1,10 @@
+var city
+var cityListArray
 var cityHistory = $('#city-list'); // parent
 var current = $('#weather-current'); 
 var future = $('#weather-future')
 var forecast = $('#forecast')
-var city
+
 
 
 function weather() {
@@ -16,8 +18,6 @@ function weather() {
     citySearch.attr('name',city)
     citySearch.text(city);
     cityHistory.append(citySearch);
-    // cityList.text(city); // When I add this, it replaces the previous value
-    // cityList.append('<li class="city-titles>' + city + '</li>'); // add child to cityList parent
 
     var apiKey = 'eea82704764516c62016fa4ce2668513';
 
