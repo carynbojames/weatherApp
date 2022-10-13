@@ -1,23 +1,14 @@
 var city
-var cityListArray
+var cityListArray = []; 
 var cityHistory = $('#city-list'); // parent
 var current = $('#weather-current'); 
 var future = $('#weather-future')
 var forecast = $('#forecast')
 
 
-
 function weather() {
     var welcome = $('#instructions')
     welcome.hide()
-
-    // --- Create city history new button
-    console.log('City: ' + city)
-    citySearch = $('<button>'); // Previously missing the <>
-    citySearch.addClass('city-titles btn btn-dark my-1 w-100'); // ACTION: Deleting city-titles affected the code
-    citySearch.attr('name',city)
-    citySearch.text(city);
-    cityHistory.append(citySearch);
 
     var apiKey = 'eea82704764516c62016fa4ce2668513';
 
@@ -49,7 +40,7 @@ function weather() {
                 .then(function (response) {
                     return response.json(); 
                 })
-                
+
                 .then(function(data) {
                     // -- Get the current weather
                     let today = moment().format('M/D/YY')
@@ -64,7 +55,7 @@ function weather() {
                     // currentCard.append('<p><img src="http://openweathermap.org/img/wn/' + data.list[0].weather[0].icon + '@2x.png"/></p>')                     
 
                     // --- Get the future forecast
-                    future.show()
+                    future.show() // Displays HTML header
                     for (let i = 1; i < 6; i++) {   
                         let date = moment().add(i, 'days').format('M/D/YY')
                         let forecastCard = $('<card>') // Parent 2
@@ -85,8 +76,9 @@ function weather() {
 // --- Assign the variable city from the form
 function cityForm(event) {
     event.preventDefault();
-    city = $('input[name="city"]').val(); // get value from form
-    $('input[name="city"').val('');
+    city = $('input[name="city"]').val(); // Getting the value from the form
+    $('input[name="city"').val(''); // Clear input form by setting it to ''
+    cityHistoryBtns();
     weather();
 }
 
@@ -96,6 +88,29 @@ function cityList(event) {
     console.log('event target: ' + event.target)
     city = $(event.target).attr('name'); 
     weather();
+}
+
+// --- Create city history new button 
+function cityHistoryBtns() {
+    cityHistory.empty() // Deletes prior buttons to prevent repeat
+
+    if (cityListArray.includes(city)) {
+        return
+    } else {
+        cityListArray.push(city)
+        cityListArray.sort()
+    }
+    
+    console.log('New City: ' + city)
+    console.log(cityListArray)
+
+    for (let i = 0; i < cityListArray.length; i++) {
+        citySearch = $('<button>'); // Create a new element. Previously missing the <>
+        citySearch.addClass('city-titles btn btn-dark my-1 w-100'); // ACTION: Deleting city-titles affected the code
+        citySearch.attr('name', cityListArray[i])
+        citySearch.text(cityListArray[i]);
+        cityHistory.append(citySearch);
+    }
 }
 
 

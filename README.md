@@ -1,6 +1,8 @@
 # weatherApp
 
+## Description
 
+## Functionality
 
 Screenshot:
 ![Weather Dashboard](./assets/images/Weather%20Forecast.png)
@@ -12,3 +14,8 @@ Screenshot:
 ## GitHub Link
 
 - https://github.com/carynbojames/weatherApp 
+
+## Skills Developed
+- Programs
+    - 
+- Skills
