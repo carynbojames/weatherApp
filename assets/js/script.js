@@ -42,6 +42,7 @@ function weather() {
                 })
 
                 .then(function(data) {
+             
                     // -- Get the current weather
                     let today = moment().format('M/D/YY')
                     let currentCard = $('<card>')
