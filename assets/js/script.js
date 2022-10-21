@@ -1,5 +1,5 @@
 var city
-var cityListArray = []; 
+var cityListArray = []; // Originallyl set the variable as an empty array
 var cityHistory = $('#city-list'); // parent
 var current = $('#weather-current'); 
 var future = $('#weather-future')
@@ -30,7 +30,6 @@ function weather() {
             console.log('Lon: ' + lon)
 
             // --- Access the weather API
-            // var weatherFuture = 'http://api.openweathermap.org/data/2.5/forecast/daily?lat=' + lat + '&lon=' + lon + '&cnt=5&appid=' + apiKey;
             let queryWeather = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon='+ lon + '&appid=' + apiKey + '&units=imperial';
            
             current.empty() // Removes the child elements of the selected element
@@ -100,12 +99,23 @@ function cityHistoryBtns() {
     } else {
         cityListArray.push(city)
         cityListArray.sort()
+        localStorage.setItem("cityHistory", JSON.stringify(cityListArray))
     }
-    
+    // Reference: 04 Web APIs > 21 Ins Local Storage
+
     console.log('New City: ' + city)
     console.log(cityListArray)
 
-    for (let i = 0; i < cityListArray.length; i++) {
+    cityListLocal = JSON.parse(localStorage.getItem("cityHistory"))
+    console.log('localStorage Below: ')
+    console.log(cityListLocal) // The cities are getting stored as localStorage as an array
+    console.log(cityListLocal.length)
+
+    // To get localStorage in the code, I set the cityListArray as localStorage
+    // I pulled the same data from localStorage giving it a new variable name - cityListLocal
+    // Put it pulled loop below to get the values to show
+
+    for (let i = 0; i < cityListLocal.length; i++) {
         citySearch = $('<button>'); // Create a new element. Previously missing the <>
         citySearch.addClass('city-titles btn btn-dark my-1 w-100'); // ACTION: Deleting city-titles affected the code
         citySearch.attr('name', cityListArray[i])
@@ -114,14 +124,17 @@ function cityHistoryBtns() {
     }
 }
 
-
 var search = $('#searchBtn'); 
 search.on('click', cityForm);
-/// QUESTION: Can you make the click execute two functions? 
 
 var searchHistory = $('#search-history');
 searchHistory.on('click', '.city-titles', cityList); 
 
+// Future Feature
+// Clear search history stored in localStorage
+// var cityHistoryClear = $('#historyClear')
+// cityHistoryClear.on('click', localStorage.clear())
 
 future.hide()
+// cityHistoryBtns()
 
